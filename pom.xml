@@ -58,6 +58,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>contactapi</finalName>
 	</build>
 
 </project>
