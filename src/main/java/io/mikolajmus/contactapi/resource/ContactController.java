@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Files;
@@ -20,7 +19,7 @@ import static org.springframework.http.MediaType.*;
 @RestController
 @RequestMapping("/contacts")
 @RequiredArgsConstructor
-public class ContactResource {
+public class ContactController {
 
     private final ContactService contactService;
 

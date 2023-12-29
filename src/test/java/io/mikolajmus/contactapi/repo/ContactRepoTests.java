@@ -1,6 +1,7 @@
 package io.mikolajmus.contactapi.repo;
 
 import io.mikolajmus.contactapi.domain.Contact;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;

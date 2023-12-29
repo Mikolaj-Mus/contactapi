@@ -62,11 +62,14 @@ public class ContactService {
         String filename = id + fileExtension.apply(image.getOriginalFilename());
         try {
             Path fileStorageLocation = Paths.get(PHOTO_DIRECTORY).toAbsolutePath().normalize();
-            if(!Files.exists(fileStorageLocation)) { Files.createDirectories(fileStorageLocation); }
+            if(!Files.exists(fileStorageLocation)) {
+                Files.createDirectories(fileStorageLocation);
+            }
             Files.copy(image.getInputStream(), fileStorageLocation.resolve(filename), REPLACE_EXISTING);
             return ServletUriComponentsBuilder
                     .fromCurrentContextPath()
                     .path("/contacts/image/" + filename).toUriString();
+
         }catch (Exception exception) {
             throw new RuntimeException("Unable to save image");
         }
