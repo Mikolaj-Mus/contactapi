@@ -31,14 +31,14 @@ public class ContactServiceTest {
 
     @Mock
     private ContactRepo contactRepo;
-
     @InjectMocks
     private ContactService contactService;
 
+    private Contact contact;
 
-    @Test
-    public void ContactServiceCreateContactReturnContact() {
-        Contact contact = Contact.builder()
+    @BeforeEach
+    void setUp() {
+        contact = Contact.builder()
                 .id("de3e7fda-ae35-4a41-8376-6f6dc225580d")
                 .name("John Smith")
                 .email("johnsmith@gmail.com")
@@ -46,6 +46,10 @@ public class ContactServiceTest {
                 .phone("783 456 909")
                 .address("USA")
                 .status("Active").build();
+    }
+
+    @Test
+    public void ContactServiceCreateContactReturnContact() {
 
         when(contactRepo.save(any(Contact.class))).thenReturn(contact);
 
@@ -63,14 +67,7 @@ public class ContactServiceTest {
         Page<Contact> mockedPage = Mockito.mock(Page.class);
 
         when(mockedPage.getContent()).thenReturn(Arrays.asList(
-                Contact.builder()
-                        .id("de3e7fda-ae35-4a41-8376-6f6dc225580d")
-                        .name("John Smith")
-                        .email("johnsmith@gmail.com")
-                        .title("Tester")
-                        .phone("783 456 909")
-                        .address("USA")
-                        .status("Active").build(),
+                contact,
                 Contact.builder()
                         .name("Adam Buster")
                         .email("adambuster@gmail.com")
@@ -92,14 +89,6 @@ public class ContactServiceTest {
 
     @Test
     public void contactServiceGetContactReturnContact() {
-        Contact contact = Contact.builder()
-                .id("de3e7fda-ae35-4a41-8376-6f6dc225580d")
-                .name("John Smith")
-                .email("johnsmith@gmail.com")
-                .title("Tester")
-                .phone("783 456 909")
-                .address("USA")
-                .status("Active").build();
         System.out.println(contact.getId());
 
         when(contactRepo.findById(contact.getId())).thenReturn(Optional.of(contact));
@@ -111,14 +100,6 @@ public class ContactServiceTest {
 
     @Test
     void contactServiceUploadPhotoReturnPhotoUrl() {
-        Contact contact = Contact.builder()
-                .id("de3e7fda-ae35-4a41-8376-6f6dc225580d")
-                .name("John Smith")
-                .email("johnsmith@gmail.com")
-                .title("Tester")
-                .phone("783 456 909")
-                .address("USA")
-                .status("Active").build();
 
         String originalFilename = "test.jpg";
 

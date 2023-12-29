@@ -15,40 +15,36 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-public class ContactRepoTests {
+public class ContactRepoTest {
 
     @Autowired
     private ContactRepo contactRepo;
 
-    @Test
-    public void contactRepoSaveAllReturnContact() {
+    private Contact contact;
 
-        // Arrange
-        Contact contact = Contact.builder()
+    @BeforeEach
+    void setUp() {
+        contact = Contact.builder()
+                .id("de3e7fda-ae35-4a41-8376-6f6dc225580d")
                 .name("John Smith")
                 .email("johnsmith@gmail.com")
                 .title("Tester")
                 .phone("783 456 909")
                 .address("USA")
                 .status("Active").build();
+    }
 
-        // Act
+    @Test
+    public void contactRepoSaveAllReturnContact() {
+
         Contact savedContact = contactRepo.save(contact);
 
-        // Assert
         assertThat(savedContact).isNotNull();
         assertThat(savedContact.getId()).isNotNull();
     }
 
     @Test
     public void contactRepoGetAllReturnContacts() {
-        Contact contact1 = Contact.builder()
-                .name("John Smith")
-                .email("johnsmith@gmail.com")
-                .title("Tester")
-                .phone("783 456 909")
-                .address("USA")
-                .status("Active").build();
 
         Contact contact2 = Contact.builder()
                 .name("Adam Buster")
@@ -58,7 +54,7 @@ public class ContactRepoTests {
                 .address("Canada")
                 .status("Inactive").build();
 
-        contactRepo.save(contact1);
+        contactRepo.save(contact);
         contactRepo.save(contact2);
 
         List<Contact> contactList = contactRepo.findAll();
@@ -69,13 +65,6 @@ public class ContactRepoTests {
 
     @Test
     public void contactRepoFindByIdReturnContact() {
-        Contact contact = Contact.builder()
-                .name("John Smith")
-                .email("johnsmith@gmail.com")
-                .title("Tester")
-                .phone("783 456 909")
-                .address("USA")
-                .status("Active").build();
 
         contactRepo.save(contact);
 
@@ -87,13 +76,6 @@ public class ContactRepoTests {
 
     @Test
     public void contactRepoUpdateContactReturnContact() {
-        Contact contact = Contact.builder()
-                .name("John Smith")
-                .email("johnsmith@gmail.com")
-                .title("Tester")
-                .phone("783 456 909")
-                .address("USA")
-                .status("Active").build();
 
         contactRepo.save(contact);
 
@@ -108,13 +90,6 @@ public class ContactRepoTests {
 
     @Test
     public void contactRepoDeleteContactReturnContactIsEmpty() {
-        Contact contact = Contact.builder()
-                .name("John Smith")
-                .email("johnsmith@gmail.com")
-                .title("Tester")
-                .phone("783 456 909")
-                .address("USA")
-                .status("Active").build();
 
         contactRepo.save(contact);
 
