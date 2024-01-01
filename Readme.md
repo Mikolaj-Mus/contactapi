@@ -23,6 +23,7 @@ If Docker is not installed, please refer to the official installation guides for
 - For Linux, follow the installation instructions for your specific distribution.
 ```bash
 sudo apt-get update
+
 sudo apt-get install docker.io
 ```
 
